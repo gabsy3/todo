@@ -31,15 +31,16 @@ export class TodoService {
       })
     );
   }
-  removeTodo(todoId: string) {
+  removeTodo(todoId: string): Observable<ITodo[]> {
     this.todos.pipe(
-      map((todos) => {
-        const todoIndex = todos.findIndex((item) => item.id === todoId);
-        return todos.slice(todoIndex, todoIndex + 1);
+      map((todosArr) => {
+        const todoIndex = todosArr.findIndex((item) => item.id === todoId);
+        this.httpClient.delete(`http://localhost:3000/todos/` + todoIndex).subscribe(data => console.log(data));
       })
     );
+    return this.getTodos();
   }
-  filterTodosByStatus(status: string) {
+  filterTodosByStatus(status: string): Observable<ITodo[]> {
     if (status === 'ALL') {
       return this.todos.pipe(map((todos) => todos));
     }

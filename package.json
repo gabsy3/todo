@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:todo": "node dist/todo/server/server.mjs"
+    "serve:ssr:todo": "node dist/todo/server/server.mjs",
+    "json-server":"json-server --wtach db.json"
   },
   "private": true,
   "dependencies": {
