@@ -1,0 +1,16 @@
+.todo-wrapper {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0px;
+    padding: 10px;
+    &:hover{
+        background: #eee;
+    }
+    .todo-content{
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,19 @@
+<div class="todos-wrapper">
+    <h4 class="title">filter by</h4>
+    <div class="btn-wrapper">
+        <div>
+            <button mat-raised-button color="primary" (click)="filterTodoByStatus('ALL')" class="mat-button-default">ALL</button>
+            <button mat-raised-button color="primary" (click)="filterTodoByStatus('OPEN')" class="mat-button-default">OPEN</button>
+            <button mat-raised-button color="primary" (click)="filterTodoByStatus('CLOSE')" class="mat-button-default">CLOSE</button>
+        </div>
+        <div>
+            <button mat-raised-button color="primary" (click)="filterTodoByStatus('ALL')" class="mat-button-default">Add Todo</button>
+        </div>
+    </div>
+
+    <hr>
+
+    @for (todo of todos; track todo.id){
+        <app-todo [todo]="todo"></app-todo>
+    }
+</div>

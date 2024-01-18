@@ -1,0 +1,13 @@
+<div class="todo-wrapper">
+    <div class="todo-content">
+        <h3>{{todo.title}}</h3>
+        <div>{{todo.description}}</div>
+        <div>{{todo.status}}</div>
+    </div>
+
+    <div class="btn-wrapper">
+        <button mat-raised-button color="primary" (click)="updateTodo(todo)" class="mat-button-default">Update</button>
+        <button mat-raised-button color="primary" (click)="removeTodo(todo)" class="mat-button-default">Remove</button>
+    </div>
+
+</div>
