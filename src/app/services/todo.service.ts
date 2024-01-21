@@ -37,9 +37,8 @@ export class TodoService {
       });
   }
   removeTodo(todos: ITodo[], todo: ITodo) {
-    const todoIndex = todos.findIndex((item) => item.id === todo.id);
     this.httpClient
-      .delete<ITodo[]>('http://localhost:3000/todos/' + todoIndex)
+      .delete<ITodo[]>('http://localhost:3000/todos/' + todo.id)
       .subscribe((data) => {
         this.todos.next(data);
       });
