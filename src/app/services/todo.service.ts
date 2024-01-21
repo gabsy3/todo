@@ -1,51 +1,53 @@
 import { Injectable, inject } from '@angular/core';
 import { ITodo } from '../models/todo.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, tap } from 'rxjs';
+import { BehaviorSubject, map, tap  } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
-  todos = new Observable<ITodo[]>();
+  todos = new BehaviorSubject<ITodo[]>([]);
   httpClient = inject(HttpClient);
   constructor() {}
-  getTodos(): Observable<ITodo[]> {
-    this.todos = this.httpClient.get<ITodo[]>('http://localhost:3000/todos');
+
+  initTodos() {
+    this.httpClient
+      .get<ITodo[]>('http://localhost:3000/todos')
+      .subscribe((data) => {
+        this.todos.next(data);
+      });
+  }
+  getTodos() {
     return this.todos;
   }
   addTodo(todo: ITodo) {
-    this.todos.pipe(
-      map((todos) => {
-        todos.push(todo);
-      })
-    );
+    this.httpClient
+      .post<ITodo[]>('http://localhost:3000/todos', todo)
+      .subscribe((data) => {
+        this.todos.next(data);
+      });
   }
-  updateTodo(todo: ITodo) {
-    this.todos.pipe(
-      map((todos) => {
-        const todoIndex = todos.findIndex((item) => item.id === todo.id);
-        todos[todoIndex].title = todo.title;
-        todos[todoIndex].description = todo.description;
-        todos[todoIndex].status = todo.status;
-      })
-    );
+  updateTodo(todos: ITodo[], todo: ITodo) {
+    const todoIndex = todos.findIndex((item) => item.id === todo.id);
+    this.httpClient
+      .put<ITodo[]>('http://localhost:3000/todos/', todoIndex)
+      .subscribe((data) => {
+        this.todos.next(data);
+      });
   }
-  removeTodo(todoId: string): Observable<ITodo[]> {
-    this.todos.pipe(
-      map((todosArr) => {
-        const todoIndex = todosArr.findIndex((item) => item.id === todoId);
-        this.httpClient.delete(`http://localhost:3000/todos/` + todoIndex).subscribe(data => console.log(data));
-      })
-    );
-    return this.getTodos();
+  removeTodo(todos: ITodo[], todo: ITodo) {
+    const todoIndex = todos.findIndex((item) => item.id === todo.id);
+    this.httpClient
+      .delete<ITodo[]>('http://localhost:3000/todos/' + todoIndex)
+      .subscribe((data) => {
+        this.todos.next(data);
+      });
   }
-  filterTodosByStatus(status: string): Observable<ITodo[]> {
-    if (status === 'ALL') {
-      return this.todos.pipe(map((todos) => todos));
+  filterTodosByStatus(status: string) {
+    if(status === "ALL"){
+      return this.todos.getValue();
     }
-    return this.todos.pipe(
-      map((todos) => todos.filter((items) => items.status === status))
-    );
+    return this.todos.getValue().filter(items => items.status === status);
   }
 }

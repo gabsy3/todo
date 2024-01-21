@@ -12,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class TodoComponent  implements OnInit{
   todoService = inject(TodoService);
+  todos$ = this.todoService.getTodos();
+
   @Input() todo!: ITodo;
   ngOnInit(): void {
   }
@@ -19,6 +21,9 @@ export class TodoComponent  implements OnInit{
     
   }
   removeTodo(todo:ITodo){
-    this.todoService.removeTodo(todo.id).subscribe(data => console.log(data));
+    this.todos$.subscribe(todos => {
+      this.todoService.removeTodo(todos,todo);
+    });
+    this.todos$ = this.todoService.getTodos();
   }
 }

@@ -12,8 +12,7 @@
     </div>
 
     <hr>
-
-    @for (todo of todos; track todo.id){
-        <app-todo [todo]="todo"></app-todo>
-    }
+        @for (todo of todos$ | async; track todo.id){
+            <app-todo [todo]="todo"></app-todo>
+        }
 </div>
