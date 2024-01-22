@@ -19,7 +19,7 @@ export class TodoComponent implements OnInit {
   updateTodo(todo: ITodo) {}
   removeTodo(todo: ITodo) {
     this.todoService.removeTodo(todo).subscribe((data) => {
-      this.todos$ = this.todoService.getTodos();
+      console.log(data);
     });
   }
 }
