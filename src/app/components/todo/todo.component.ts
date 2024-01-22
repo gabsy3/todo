@@ -8,22 +8,18 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [MatButtonModule],
   templateUrl: './todo.component.html',
-  styleUrl: './todo.component.scss'
+  styleUrl: './todo.component.scss',
 })
-export class TodoComponent  implements OnInit{
+export class TodoComponent implements OnInit {
   todoService = inject(TodoService);
   todos$ = this.todoService.getTodos();
 
   @Input() todo!: ITodo;
-  ngOnInit(): void {
-  }
-  updateTodo(todo:ITodo){
-    
-  }
-  removeTodo(todo:ITodo){
-    this.todos$.subscribe(todos => {
-      this.todoService.removeTodo(todos,todo);
+  ngOnInit(): void {}
+  updateTodo(todo: ITodo) {}
+  removeTodo(todo: ITodo) {
+    this.todoService.removeTodo(todo).subscribe((data) => {
+      this.todos$ = this.todoService.getTodos();
     });
-    this.todos$ = this.todoService.getTodos();
   }
 }
