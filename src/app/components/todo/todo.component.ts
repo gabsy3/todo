@@ -20,8 +20,6 @@ export class TodoComponent implements OnInit {
   removeTodo(todo: ITodo) {
     this.todoService.removeTodo(todo).subscribe((data) => {
       this.todoService.initTodos();
-      this.todoService.getTodos().subscribe((data) => (this.todos = data));
-      this.todoService.todos.next(this.todos);
     });
   }
 }
