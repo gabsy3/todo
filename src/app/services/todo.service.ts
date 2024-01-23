@@ -27,10 +27,6 @@ export class TodoService {
     return this.httpClient.post<ITodo[]>('http://localhost:3000/todos', todo);
   }
   updateTodo(todo: ITodo) {
-
-    todo.title = todo.id + "update"
-    todo.description = todo.id + "update";
-   
     return this.httpClient.put<ITodo[]>(
       'http://localhost:3000/todos/' + todo.id , todo);
   }
