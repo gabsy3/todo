@@ -2,7 +2,7 @@
     <div class="todo-content">
         <h3>{{todo.title}}</h3>
         <div>{{todo.description}}</div>
-        <div>{{todo.status}}</div>
+        <div [ngClass]="{'close':todo.status === 'CLOSE' , 'open':todo.status === 'OPEN'}">{{todo.status}}</div>
     </div>
 
     <div class="btn-wrapper">
