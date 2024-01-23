@@ -7,7 +7,7 @@ import { BehaviorSubject, map, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class TodoService {
-  origTodo:ITodo[] = [];
+  origTodo: ITodo[] = [];
   todos = new BehaviorSubject<ITodo[]>([]);
   httpClient = inject(HttpClient);
   constructor() {}
@@ -24,18 +24,20 @@ export class TodoService {
     return this.todos.asObservable();
   }
   addTodo(todo: ITodo) {
-    return this.httpClient
-      .post<ITodo[]>('http://localhost:3000/todos', todo)
+    return this.httpClient.post<ITodo[]>('http://localhost:3000/todos', todo);
   }
-  updateTodo(todos: ITodo[], todo: ITodo) {
-    const todoIndex = todos.findIndex((item) => item.id === todo.id);
+  updateTodo(todo: ITodo) {
+
+    todo.title = todo.id + "update"
+    todo.description = todo.id + "update";
+   
     return this.httpClient.put<ITodo[]>(
-      'http://localhost:3000/todos/',
-      todoIndex
-    );
+      'http://localhost:3000/todos/' + todo.id , todo);
   }
   removeTodo(todo: ITodo) {
-    return this.httpClient.delete<ITodo[]>('http://localhost:3000/todos/' + todo.id);
+    return this.httpClient.delete<ITodo[]>(
+      'http://localhost:3000/todos/' + todo.id
+    );
   }
   filterTodosByStatus(status: string) {
     if (status === 'ALL') {

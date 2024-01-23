@@ -15,4 +15,7 @@
         @for (todo of todos$ | async; track todo.id){
             <app-todo [todo]="todo"></app-todo>
         }
+        @empty{
+            <div> todo list empty</div>
+        }
 </div>

@@ -13,10 +13,13 @@ import { Observable, tap } from 'rxjs';
 })
 export class TodoComponent implements OnInit {
   todoService = inject(TodoService);
-  todos: ITodo[] = [];
   @Input() todo!: ITodo;
   ngOnInit(): void {}
-  updateTodo(todo: ITodo) {}
+  updateTodo(todo: ITodo) {
+    this.todoService.updateTodo(todo).subscribe((data) => {
+      this.todoService.initTodos();
+    });
+  }
   removeTodo(todo: ITodo) {
     this.todoService.removeTodo(todo).subscribe((data) => {
       this.todoService.initTodos();
