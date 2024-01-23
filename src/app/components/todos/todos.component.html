@@ -1,10 +1,10 @@
 <div class="todos-wrapper">
-    <h4 class="title">filter by</h4>
+    <h4 class="title">filter Project</h4>
     <div class="btn-wrapper">
         <div>
-            <button mat-stroked-button color="link" (click)="filterTodoByStatus('ALL')" class="mat-button-default">ALL</button>
-            <button mat-stroked-button color="link" (click)="filterTodoByStatus('OPEN')" class="mat-button-default">OPEN</button>
-            <button mat-stroked-button color="link" (click)="filterTodoByStatus('CLOSE')" class="mat-button-default">CLOSE</button>
+            <button mat-stroked-button color="link" (click)="filterTodoByStatus('ALL')" [ngClass]="{'active':status === 'ALL'}" class="mat-button-default">ALL</button>
+            <button mat-stroked-button color="link" (click)="filterTodoByStatus('OPEN')" [ngClass]="{'active':status === 'OPEN'}" class="mat-button-default">OPEN</button>
+            <button mat-stroked-button color="link" (click)="filterTodoByStatus('CLOSE')" [ngClass]="{'active':status === 'CLOSE'}" class="mat-button-default">CLOSE</button>
         </div>
         <div>
             <button mat-raised-button color="primary" (click)="filterTodoByStatus('ALL')" class="mat-button-default">Add Todo</button>

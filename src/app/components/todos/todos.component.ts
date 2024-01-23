@@ -15,11 +15,13 @@ import { CommonModule } from '@angular/common';
 export class TodosComponent implements OnInit {
   todoService = inject(TodoService);
   todos$ = this.todoService.getTodos();
+  status : string = 'ALL';
   ngOnInit(): void {
     this.todoService.initTodos();
 
   }
   filterTodoByStatus(status: todoStatus) {
+    this.status = status;
     const filterdArr = this.todoService.filterTodosByStatus(status);
     this.todoService.todos.next(filterdArr);
   }
