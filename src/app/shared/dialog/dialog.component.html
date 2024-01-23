@@ -1,27 +1,30 @@
 <h1 mat-dialog-title>Update</h1>
 <div mat-dialog-content>
-    <mat-form-field>
-        <mat-label>Id</mat-label>
-        <input matInput [(ngModel)]="data.id" readonly="true">
-    </mat-form-field>
-    <div>
+    <form [formGroup]="updateTodoForm">
         <mat-form-field>
-            <mat-label>Title</mat-label>
-            <input matInput [(ngModel)]="data.title">
+            <mat-label>Id</mat-label>
+            <input matInput [(ngModel)]="data.id" readonly="true" formControlName="id">
         </mat-form-field>
-    </div>
-   <div>
-    <mat-form-field>
-        <mat-label>Description</mat-label>
-        <input matInput [(ngModel)]="data.description">
-    </mat-form-field>
-   </div>
-   <div>
-    <mat-form-field>
-        <mat-label>Status</mat-label>
-        <input matInput [(ngModel)]="data.status">
-    </mat-form-field>
-   </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input matInput [(ngModel)]="data.title" formControlName="title">
+            </mat-form-field>
+        </div>
+       <div>
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput [(ngModel)]="data.description" formControlName="description">
+        </mat-form-field>
+       </div>
+       <div>
+        <mat-form-field>
+            <mat-label>Status</mat-label>
+            <input matInput [(ngModel)]="data.status" formControlName="status">
+        </mat-form-field>
+       </div>
+    </form>
+  
    
 </div>
 <div mat-dialog-actions>
