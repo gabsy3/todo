@@ -2,6 +2,7 @@ import { Component, Input, OnInit, inject } from '@angular/core';
 import { ITodo } from '../../models/todo.model';
 import { TodoService } from '../../services/todo.service';
 import { MatButtonModule } from '@angular/material/button';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-todo',
@@ -12,14 +13,14 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class TodoComponent implements OnInit {
   todoService = inject(TodoService);
-  todos$ = this.todoService.getTodos();
-
+  todos : ITodo[] = [];
   @Input() todo!: ITodo;
   ngOnInit(): void {}
   updateTodo(todo: ITodo) {}
   removeTodo(todo: ITodo) {
-    this.todoService.removeTodo(todo).subscribe((data) => {
-      console.log(data);
-    });
+    this.todoService.removeTodo(todo).subscribe();
+    this.todoService.initTodos();
+    this.todoService.getTodos().subscribe(data => this.todos = data);
+    this.todoService.todos.next(this.todos);
   }
 }
