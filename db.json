@@ -25,13 +25,6 @@
       "title": "test 4",
       "description": "test desc 4",
       "status": "CLOSE"
-    },
-    {
-      "id": "5",
-      "action": "add",
-      "title": "test 5",
-      "description": "test 5",
-      "status": "OPEN"
     }
   ]
 }

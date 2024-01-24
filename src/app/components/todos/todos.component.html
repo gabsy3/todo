@@ -25,13 +25,15 @@
     <mat-divider></mat-divider>
     @if((todos$ | async)?.length){
     <div>
-        <span>Total displayed now:</span><span> {{(todos$ | async)?.length}}</span>
-    </div>
-    <div>
-        <span>Total open:</span><span>{{totalTodos.totalOpened}}</span>
-    </div>
-    <div>
-        <span>Total close:</span><span> {{totalTodos.totalClosed}}</span>
+        <div>
+            <span>Total displayed now:</span><span> {{(todos$ | async)?.length}}</span>
+        </div>
+        <div>
+            <span>Total open:</span><span>{{totalTodos.totalOpened}}</span>
+        </div>
+        <div>
+            <span>Total close:</span><span> {{totalTodos.totalClosed}}</span>
+        </div>
     </div>
     }
 </div>
