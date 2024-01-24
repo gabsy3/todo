@@ -26,11 +26,16 @@ import { CommonModule } from '@angular/common';
 export class TodoComponent implements OnInit {
   todoService = inject(TodoService);
   dialog = inject(MatDialog);
+  totalTodos: { totalOpened: number; totalClosed: number } = {
+    totalOpened: 0,
+    totalClosed: 0,
+  };
   @Input() todo!: ITodo;
   ngOnInit(): void {}
   updateTodo(todo: ITodo) {
     this.todoService.updateTodo(todo).subscribe((data) => {
       this.todoService.initTodos();
+      this.showTotalTodos();
     });
   }
   removeTodo(todo: ITodo) {
@@ -50,8 +55,14 @@ export class TodoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if(result){
-        this.updateTodo(result)
+        this.updateTodo(result);
       }
     });
+  }
+  showTotalTodos() {
+    this.todoService.showTotal();
+    this.todoService
+      .getTotalTodos()
+      .subscribe((data) => (this.totalTodos = data));
   }
 }

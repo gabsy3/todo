@@ -10,6 +10,7 @@ export class TodoService {
   origTodo: ITodo[] = [];
   todos = new BehaviorSubject<ITodo[]>([]);
   httpClient = inject(HttpClient);
+  totalTodos   = new BehaviorSubject<{totalOpened:number , totalClosed : number}>({totalOpened: 0, totalClosed :0})
   constructor() {}
 
   initTodos() {
@@ -18,7 +19,11 @@ export class TodoService {
       .subscribe((data) => {
         this.origTodo = data;
         this.todos.next(data);
+        this.showTotal();
       });
+  }
+  getTotalTodos(){
+    return this.totalTodos.asObservable();
   }
   getTodos() {
     return this.todos.asObservable();
@@ -40,5 +45,11 @@ export class TodoService {
       return this.origTodo;
     }
     return this.origTodo.filter((items) => items.status === status);
+  }
+  showTotal(){
+    const closed = this.origTodo.filter(data=> data.status === 'CLOSE').length;
+    const opened = this.origTodo.filter(data=> data.status === 'OPEN').length;
+    this.totalTodos.next({totalOpened: opened, totalClosed :closed});
+
   }
 }

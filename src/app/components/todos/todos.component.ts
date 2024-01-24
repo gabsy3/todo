@@ -16,23 +16,24 @@ import { tap } from 'rxjs';
 export class TodosComponent implements OnInit {
   todoService = inject(TodoService);
   todos$ = this.todoService.getTodos();
-  todosOpen:number = 0;
-  todosClose:number = 0;
-  status : string = 'ALL';
+  totalTodos: { totalOpened: number; totalClosed: number } = {
+    totalOpened: 0,
+    totalClosed: 0,
+  };
+  status: string = 'ALL';
   ngOnInit(): void {
     this.todoService.initTodos();
     this.showTotalTodos();
-
   }
   filterTodoByStatus(status: todoStatus) {
     this.status = status;
     const filterdArr = this.todoService.filterTodosByStatus(status);
     this.todoService.todos.next(filterdArr);
   }
-  showTotalTodos(){
-    this.todos$.pipe(tap(data=> {
-      this.todosOpen = data.filter(item => item.status === 'OPEN').length;
-      this.todosClose = data.filter(item => item.status === 'CLOSE').length;
-    })).subscribe();
+  showTotalTodos() {
+    this.todoService.showTotal();
+    this.todoService
+      .getTotalTodos()
+      .subscribe((data) => (this.totalTodos = data));
   }
 }
