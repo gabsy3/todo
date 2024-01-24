@@ -16,15 +16,17 @@
     },
     {
       "id": "3",
+      "action": "update",
       "title": "test 3",
       "description": "test desc 3",
-      "status": "OPEN"
+      "status": "CLOSE"
     },
     {
       "id": "4",
-      "title": "test 4",
-      "description": "test desc 4",
-      "status": "CLOSE"
+      "action": "add",
+      "title": "test",
+      "description": "test",
+      "status": "OPEN"
     }
   ]
 }
