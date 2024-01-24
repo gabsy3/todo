@@ -2,20 +2,36 @@
     <h4 class="title">filter Project</h4>
     <div class="btn-wrapper">
         <div>
-            <button mat-stroked-button color="link" (click)="filterTodoByStatus('ALL')" [ngClass]="{'active':status === 'ALL'}" class="mat-button-default">ALL</button>
-            <button mat-stroked-button color="link" (click)="filterTodoByStatus('OPEN')" [ngClass]="{'active':status === 'OPEN'}" class="mat-button-default">OPEN</button>
-            <button mat-stroked-button color="link" (click)="filterTodoByStatus('CLOSE')" [ngClass]="{'active':status === 'CLOSE'}" class="mat-button-default">CLOSE</button>
+            <button mat-stroked-button color="link" (click)="filterTodoByStatus('ALL')"
+                [ngClass]="{'active':status === 'ALL'}" class="mat-button-default">ALL</button>
+            <button mat-stroked-button color="link" (click)="filterTodoByStatus('OPEN')"
+                [ngClass]="{'active':status === 'OPEN'}" class="mat-button-default">OPEN</button>
+            <button mat-stroked-button color="link" (click)="filterTodoByStatus('CLOSE')"
+                [ngClass]="{'active':status === 'CLOSE'}" class="mat-button-default">CLOSE</button>
         </div>
         <div>
-            <button mat-raised-button color="primary" (click)="filterTodoByStatus('ALL')" class="mat-button-default">Add Todo</button>
+            <button mat-raised-button color="primary" (click)="filterTodoByStatus('ALL')" class="mat-button-default">Add
+                Todo</button>
         </div>
     </div>
 
     <hr>
-        @for (todo of todos$ | async; track todo.id){
-            <app-todo [todo]="todo"></app-todo>
-        }
-        @empty{
-            <div> todo list empty</div>
-        }
+    @for (todo of todos$ | async; track todo.id){
+    <app-todo [todo]="todo"></app-todo>
+    }
+    @empty{
+    <div> todo list empty</div>
+    }
+    <hr>
+    @if((todos$ | async)?.length){
+    <div>
+        <span>Total:</span><span> {{(todos$ | async)?.length}}</span>
+    </div>
+    <div>
+        <span>Total open:</span><span>{{todosOpen}}</span>
+    </div>
+    <div>
+        <span>Total close:</span><span> {{todosClose}}</span>
+    </div>
+    }
 </div>

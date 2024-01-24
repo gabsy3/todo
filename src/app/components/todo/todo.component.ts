@@ -38,7 +38,7 @@ export class TodoComponent implements OnInit {
       this.todoService.initTodos();
     });
   }
-  openDialog(todo: ITodo): void {
+  updateTodoClicked(todo: ITodo): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {
         id: todo.id,
