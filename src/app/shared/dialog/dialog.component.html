@@ -1,35 +1,40 @@
-<h1 mat-dialog-title>Update</h1>
-<div mat-dialog-content>
-    <form [formGroup]="updateTodoForm">
-        <mat-form-field>
-            <mat-label>Id</mat-label>
-            <input matInput [(ngModel)]="data.id" readonly="true" formControlName="id">
-        </mat-form-field>
-        <div>
+@if(data.action === 'update'){
+    <h1 mat-dialog-title>Update</h1>
+    <div mat-dialog-content>
+        <form [formGroup]="updateTodoForm">
             <mat-form-field>
-                <mat-label>Title</mat-label>
-                <input matInput [(ngModel)]="data.title" formControlName="title">
+                <mat-label>Id</mat-label>
+                <input matInput [(ngModel)]="data.id" readonly="true" formControlName="id">
             </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field>
-                <mat-label>Description</mat-label>
-                <input matInput [(ngModel)]="data.description" formControlName="description">
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field>
-                <mat-label>Status</mat-label>
-                <mat-select [(ngModel)]="data.status" formControlName="status">
-                    @for (status of dropdownStatus; track status) {
-                    <mat-option [value]=" status">{{status}}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </form>
-</div>
-<div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Close</button>
-    <button mat-button (click)="save()" cdkFocusInitial>Ok</button>
-</div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Title</mat-label>
+                    <input matInput [(ngModel)]="data.title" formControlName="title">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Description</mat-label>
+                    <input matInput [(ngModel)]="data.description" formControlName="description">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Status</mat-label>
+                    <mat-select [(ngModel)]="data.status" formControlName="status">
+                        @for (status of dropdownStatus; track status) {
+                        <mat-option [value]=" status">{{status}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Close</button>
+        <button mat-button (click)="save()" cdkFocusInitial>Ok</button>
+    </div>
+}
+@else {
+    <h1 mat-dialog-title>Add</h1>
+}

@@ -8,9 +8,10 @@
     },
     {
       "id": "2",
+      "action": "update",
       "title": "test 2",
       "description": "test desc 2",
-      "status": "OPEN"
+      "status": "CLOSE"
     },
     {
       "id": "3",
