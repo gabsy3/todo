@@ -15,14 +15,14 @@
         </div>
     </div>
 
-    <hr>
+    <mat-divider></mat-divider>
     @for (todo of todos$ | async; track todo.id){
     <app-todo [todo]="todo"></app-todo>
     }
     @empty{
     <div> todo list empty</div>
     }
-    <hr>
+    <mat-divider></mat-divider>
     @if((todos$ | async)?.length){
     <div>
         <span>Total displayed now:</span><span> {{(todos$ | async)?.length}}</span>

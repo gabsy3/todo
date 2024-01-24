@@ -4,12 +4,13 @@ import { TodoService } from '../../services/todo.service';
 import { TodoComponent } from '../todo/todo.component';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import {MatDividerModule} from '@angular/material/divider';
 import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-todos',
   standalone: true,
-  imports: [TodoComponent, MatButtonModule, CommonModule],
+  imports: [TodoComponent, MatButtonModule, CommonModule , MatDividerModule],
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.scss',
 })
