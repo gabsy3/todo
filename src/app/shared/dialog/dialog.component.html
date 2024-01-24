@@ -11,21 +11,23 @@
                 <input matInput [(ngModel)]="data.title" formControlName="title">
             </mat-form-field>
         </div>
-       <div>
-        <mat-form-field>
-            <mat-label>Description</mat-label>
-            <input matInput [(ngModel)]="data.description" formControlName="description">
-        </mat-form-field>
-       </div>
-       <div>
-        <mat-form-field>
-            <mat-label>Status</mat-label>
-            <input matInput [(ngModel)]="data.status" formControlName="status">
-        </mat-form-field>
-       </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <input matInput [(ngModel)]="data.description" formControlName="description">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Status</mat-label>
+                <mat-select [(ngModel)]="data.status" formControlName="status">
+                    @for (status of dropdownStatus; track status) {
+                    <mat-option [value]=" status">{{status}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
     </form>
-  
-   
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Close</button>

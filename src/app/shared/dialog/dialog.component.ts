@@ -12,7 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ITodo } from '../../models/todo.model';
+import { ITodo, todoStatus } from '../../models/todo.model';
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-dialog',
@@ -27,6 +28,7 @@ import { ITodo } from '../../models/todo.model';
     MatDialogActions,
     MatDialogClose,
     ReactiveFormsModule,
+    MatSelectModule,
   ],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.scss',
@@ -38,6 +40,7 @@ export class DialogComponent implements OnInit {
     description: new FormControl('' ,Validators.required),
     status: new FormControl('' ,Validators.required)
   });
+  dropdownStatus = ['OPEN' , 'CLOSE'];
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ITodo
