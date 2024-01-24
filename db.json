@@ -2,9 +2,10 @@
   "todos": [
     {
       "id": "1",
+      "action": "update",
       "title": "test 1",
       "description": "test 1",
-      "status": "OPEN"
+      "status": "CLOSE"
     },
     {
       "id": "2",
@@ -24,6 +25,13 @@
       "title": "test 4",
       "description": "test desc 4",
       "status": "CLOSE"
+    },
+    {
+      "id": 5,
+      "action": "add",
+      "title": "test 5",
+      "description": "test 5",
+      "status": "OPEN"
     }
   ]
 }
