@@ -9,11 +9,17 @@ import {
   MatDialogClose,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ITodo, todoStatus } from '../../models/todo.model';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-dialog',
@@ -35,21 +41,25 @@ import {MatSelectModule} from '@angular/material/select';
 })
 export class DialogComponent implements OnInit {
   updateTodoForm = new FormGroup({
-    id: new FormControl('' ,Validators.required),
-    title: new FormControl('' ,Validators.required),
-    description: new FormControl('' ,Validators.required),
-    status: new FormControl('' ,Validators.required)
+    id: new FormControl('', Validators.required),
+    title: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+    status: new FormControl('', Validators.required),
   });
-  dropdownStatus = ['OPEN' , 'CLOSE'];
+  dropdownStatus = ['OPEN', 'CLOSE'];
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ITodo
   ) {}
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   onNoClick(): void {
-      this.dialogRef.close();
-    }
+    this.dialogRef.close();
+  }
+  save() {
+    const {valid} = this.updateTodoForm;
+    if(valid){
+        this.dialogRef.close(this.data);
+    }      
+  }
 }
