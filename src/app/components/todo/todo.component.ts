@@ -41,6 +41,7 @@ export class TodoComponent implements OnInit {
   removeTodo(todo: ITodo) {
     this.todoService.removeTodo(todo).subscribe((data) => {
       this.todoService.initTodos();
+      this.showTotalTodos();
     });
   }
   updateTodoClicked(todo: ITodo): void {
