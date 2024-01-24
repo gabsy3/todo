@@ -39,7 +39,10 @@ export class TodosComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         result.id = result.id.toString();
-        this.todoService.addTodo(result).subscribe();
+        this.todoService.addTodo(result).subscribe(data => {
+          this.todoService.initTodos();
+          this.showTotalTodos();
+        });
       }
     });
   }
@@ -51,7 +54,6 @@ export class TodosComponent implements OnInit {
           this.lastTodoIndex+=1;
         })
       ).subscribe();
-      this.todoService.initTodos();
   }
   filterTodoByStatus(status: todoStatus) {
     this.status = status;
