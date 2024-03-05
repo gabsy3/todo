@@ -15,7 +15,7 @@ export class TodoService {
 
   initTodos() {
     return this.httpClient
-      .get<ITodo[]>('http://localhost:8000/todos')
+      .get<ITodo[]>('http://localhost:8000/todos').pipe(map((data:any)=> data.arr))
       .subscribe((data) => {
         this.origTodo = data;
         this.todos.next(data);
