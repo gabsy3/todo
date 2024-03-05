@@ -15,7 +15,7 @@ export class TodoService {
 
   initTodos() {
     return this.httpClient
-      .get<ITodo[]>('https://github.com/gabsy3/todo/db.json')
+      .get<ITodo[]>('http://localhost:8000/todos')
       .subscribe((data) => {
         this.origTodo = data;
         this.todos.next(data);
@@ -29,15 +29,15 @@ export class TodoService {
     return this.todos.asObservable();
   }
   addTodo(todo: ITodo) {
-    return this.httpClient.post<ITodo[]>('https://github.com/gabsy3/todo/db.json', todo);
+    return this.httpClient.post<ITodo[]>('http://localhost:8000/todos', todo);
   }
   updateTodo(todo: ITodo) {
     return this.httpClient.put<ITodo[]>(
-      'https://github.com/gabsy3/todo/db.json/' + todo.id , todo);
+      'http://localhost:8000/todos/' + todo.id , todo);
   }
   removeTodo(todo: ITodo) {
     return this.httpClient.delete<ITodo[]>(
-      'https://github.com/gabsy3/todo/db.json/' + todo.id
+      'http://localhost:8000/todos/' + todo.id
     );
   }
   filterTodosByStatus(status: string) {
