@@ -15,7 +15,7 @@ export class TodoService {
 
   initTodos() {
     return this.httpClient
-      .get<ITodo[]>('http://localhost:8000/todos').pipe(map((data:any)=> data.arr))
+      .get<ITodo[]>('https://todo-zekd.onrender.com/todos').pipe(map((data:any)=> data.arr))
       .subscribe((data) => {
         this.origTodo = data;
         this.todos.next(data);
@@ -29,15 +29,15 @@ export class TodoService {
     return this.todos.asObservable();
   }
   addTodo(todo: ITodo) {
-    return this.httpClient.post<ITodo[]>('http://localhost:8000/todo/', todo);
+    return this.httpClient.post<ITodo[]>('https://todo-zekd.onrender.com/todo/', todo);
   }
   updateTodo(todo: ITodo) {
     return this.httpClient.put<ITodo[]>(
-      'http://localhost:8000/todo/' + todo.id , todo);
+      'https://todo-zekd.onrender.com/todo/' + todo.id , todo);
   }
   removeTodo(todo: ITodo) {
     return this.httpClient.delete<ITodo[]>(
-      'http://localhost:8000/todo/' + todo.id
+      'https://todo-zekd.onrender.com/todo/' + todo.id
     );
   }
   filterTodosByStatus(status: string) {
