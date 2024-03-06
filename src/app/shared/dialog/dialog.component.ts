@@ -51,7 +51,11 @@ export class DialogComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(!this.data.id){
+      this.data.id = 0;
+    }
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
