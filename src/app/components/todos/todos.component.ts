@@ -20,7 +20,6 @@ export class TodosComponent implements OnInit {
   todoService = inject(TodoService);
   dialog = inject(MatDialog);
   todos$ = this.todoService.getTodos();
-  lastTodoIndex: number = 0;
   totalTodos: { totalOpened: number; totalClosed: number } = {
     totalOpened: 0,
     totalClosed: 0,
@@ -29,11 +28,10 @@ export class TodosComponent implements OnInit {
   ngOnInit(): void {
     this.todoService.initTodos();
     this.showTotalTodos();
-    this.getLastTodoIndex();
   }
   addTodoClicked(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      data: { action: 'add', id: this.lastTodoIndex },
+      data: { action: 'add' },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -45,15 +43,6 @@ export class TodosComponent implements OnInit {
         });
       }
     });
-  }
-  getLastTodoIndex() {
-    this.todos$
-      .pipe(
-        tap((data) => {
-          this.lastTodoIndex = +data[data.length - 1]?.id;
-          this.lastTodoIndex+=1;
-        })
-      ).subscribe();
   }
   filterTodoByStatus(status: todoStatus) {
     this.status = status;

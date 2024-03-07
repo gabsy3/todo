@@ -39,7 +39,7 @@ import { MatSelectModule } from '@angular/material/select';
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.scss',
 })
-export class DialogComponent implements OnInit {
+export class DialogComponent {
   updateTodoForm = new FormGroup({
     id: new FormControl('', Validators.required),
     title: new FormControl('', Validators.required),
@@ -51,12 +51,7 @@ export class DialogComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
-  ngOnInit(): void {
-    if(!this.data.id){
-      this.data.id = 0;
-    }
-  }
-
+ 
   onNoClick(): void {
     this.dialogRef.close();
   }

@@ -15,7 +15,7 @@ export class TodoService {
 
   initTodos() {
     return this.httpClient
-      .get<ITodo[]>('https://todo-zekd.onrender.com/todos').pipe(map((data:any)=> data.arr))
+      .get<ITodo[]>('http://localhost:8000/todos')
       .subscribe((data) => {
         this.origTodo = data;
         this.todos.next(data);
@@ -29,26 +29,26 @@ export class TodoService {
     return this.todos.asObservable();
   }
   addTodo(todo: ITodo) {
-    return this.httpClient.post<ITodo[]>('https://todo-zekd.onrender.com/todo/', todo);
+    return this.httpClient.post<ITodo[]>('http://localhost:8000/todo/', todo);
   }
   updateTodo(todo: ITodo) {
     return this.httpClient.put<ITodo[]>(
-      'https://todo-zekd.onrender.com/todo/' + todo.id , todo);
+      'http://localhost:8000/todo/' + todo.id , todo);
   }
   removeTodo(todo: ITodo) {
     return this.httpClient.delete<ITodo[]>(
-      'https://todo-zekd.onrender.com/todo/' + todo.id
+      'http://localhost:8000/todo/' + todo.id
     );
   }
   filterTodosByStatus(status: string) {
     if (status === 'ALL') {
       return this.origTodo;
     }
-    return this.origTodo.filter((items) => items.status === status);
+    return this.origTodo?.filter((items) => items.status === status);
   }
   showTotal(){
-    const closed = this.origTodo.filter(data=> data.status === 'CLOSE').length;
-    const opened = this.origTodo.filter(data=> data.status === 'OPEN').length;
+    const closed = this.origTodo?.filter(data=> data.status === 'CLOSE').length;
+    const opened = this.origTodo?.filter(data=> data.status === 'OPEN').length;
     this.totalTodos.next({totalOpened: opened, totalClosed :closed});
 
   }
