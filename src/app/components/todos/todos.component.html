@@ -16,7 +16,7 @@
     </div>
 
     <mat-divider></mat-divider>
-    @for (todo of todos$ | async; track todo.id){
+    @for (todo of todos$ | async; track todo._id){
     <app-todo [todo]="todo"></app-todo>
     }
     @empty{

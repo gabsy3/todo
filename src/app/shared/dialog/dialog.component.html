@@ -7,6 +7,10 @@
 
 <div mat-dialog-content>
     <form [formGroup]="updateTodoForm">
+        <mat-form-field>
+            <mat-label>Id</mat-label>
+            <input matInput [(ngModel)]="data.id" readonly="true" formControlName="id">
+        </mat-form-field>
         <div>
             <mat-form-field>
                 <mat-label>Title</mat-label>

@@ -33,11 +33,11 @@ export class TodoService {
   }
   updateTodo(todo: ITodo) {
     return this.httpClient.put<ITodo[]>(
-      'http://localhost:8000/todo/' + todo.id , todo);
+      'http://localhost:8000/todo/' + todo._id , todo);
   }
   removeTodo(todo: ITodo) {
     return this.httpClient.delete<ITodo[]>(
-      'http://localhost:8000/todo/' + todo.id
+      'http://localhost:8000/todo/' + todo._id
     );
   }
   filterTodosByStatus(status: string) {

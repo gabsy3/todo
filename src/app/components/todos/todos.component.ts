@@ -36,7 +36,7 @@ export class TodosComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        result.id = result.id.toString();
+        result._id = result._id;
         this.todoService.addTodo(result).subscribe(data => {
           this.todoService.initTodos();
           this.showTotalTodos();
