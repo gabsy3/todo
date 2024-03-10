@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 8000;
 const path = require('path');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient,ObjectId } = require('mongodb');
 
 
 app.use(express.static(path.join(__dirname, '/dist/todo/browser/')));
@@ -47,21 +47,19 @@ app.post('/todo', async (req, res) => {
 
 app.put('/todo/:id', async (req, res) => {
     try {
-        const result = await collection.updateOne(
-            { title: "title1"},
-            { $set: req.body }
+        const result = await collection.findOneAndUpdate(
+            {_id: new ObjectId(req.params.id)},
+            {$set:req.body},
         );
-        console.log(result);
         res.json(result.value);
     } catch (error) {
-        console.log(error);
         res.status(500).send('Error updating data');
     }
 });
 
 app.delete('/todo/:id', async (req, res) => {
     try {
-        const result = await collection.findOneAndDelete({ _id: ObjectID(req.params.id) });
+        const result = await collection.findOneAndDelete({_id: new ObjectId(req.params.id)});
         res.json(result.value);
     } catch (error) {
         res.status(500).send('Error deleting data');
