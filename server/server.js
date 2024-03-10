@@ -49,7 +49,7 @@ app.put('/todo/:id', async (req, res) => {
     try {
         const result = await collection.findOneAndUpdate(
             {_id: new ObjectId(req.params.id)},
-            {$set:req.body},
+            {$set:{title:req.body.title , description:req.body.description , status:req.body.status}}
         );
         res.json(result.value);
     } catch (error) {
