@@ -1,16 +1,18 @@
 @if(data.action === 'update'){
-    <h1 mat-dialog-title>Update</h1>
+<h1 mat-dialog-title>Update</h1>
 }
 @else {
-    <h1 mat-dialog-title>Add</h1>
+<h1 mat-dialog-title>Add</h1>
 }
 
 <div mat-dialog-content>
     <form [formGroup]="updateTodoForm">
+        @if(data.action === 'update'){
         <mat-form-field>
             <mat-label>Id</mat-label>
-            <input matInput [(ngModel)]="data.id" readonly="true" formControlName="id">
+            <input matInput [(ngModel)]="data._id" readonly="true" formControlName="id">
         </mat-form-field>
+        }
         <div>
             <mat-form-field>
                 <mat-label>Title</mat-label>

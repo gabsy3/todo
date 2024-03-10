@@ -41,7 +41,7 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class DialogComponent {
   updateTodoForm = new FormGroup({
-    id: new FormControl('', Validators.required),
+    id: new FormControl(''),
     title: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     status: new FormControl('', Validators.required),

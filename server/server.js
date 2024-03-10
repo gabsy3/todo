@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 const uri = "mongodb+srv://gaby:Gb2367555@todo.imxhwqp.mongodb.net/?retryWrites=true&w=majority&appName=Todo";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(uri);
 const database = client.db('Todo');
 const collection = database.collection('todo');
 
@@ -47,13 +47,14 @@ app.post('/todo', async (req, res) => {
 
 app.put('/todo/:id', async (req, res) => {
     try {
-        const result = await collection.findOneAndUpdate(
-            { _id: ObjectID(req.params.id) },
-            { $set: req.body },
-            { returnOriginal: false }
+        const result = await collection.updateOne(
+            { title: "title1"},
+            { $set: req.body }
         );
+        console.log(result);
         res.json(result.value);
     } catch (error) {
+        console.log(error);
         res.status(500).send('Error updating data');
     }
 });
